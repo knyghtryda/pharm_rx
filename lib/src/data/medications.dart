@@ -17,9 +17,10 @@ class PharmacyOrdersNotifier extends StateNotifier<Map<String, Set<String>>> {
   }
 }
 
-final pharmacyOrdersProvider = StateNotifierProvider<PharmacyOrdersNotifier, Map<String, Set<String>>>((ref) => PharmacyOrdersNotifier());
+final pharmacyOrdersProvider =
+    StateNotifierProvider<PharmacyOrdersNotifier, Map<String, Set<String>>>((ref) => PharmacyOrdersNotifier());
 
 Future<List<String>> getMedications() async {
   final contents = await rootBundle.loadString('assets/medicationListFromNIH.txt');
-  return contents.split(',\n');
+  return contents.split(',').map((e) => e.trim()).toList();
 }
